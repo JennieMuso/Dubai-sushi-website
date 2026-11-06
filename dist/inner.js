@@ -5,26 +5,60 @@ const hero=document.querySelector('.inner-hero');
 const menuButton=document.querySelector('.menu-toggle');
 const mobileNav=document.querySelector('.mobile-nav');
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+const desktopBreakpoint=window.matchMedia('(min-width: 981px)');
+let menuTrigger=null;
 
 function updateHeader(){
   if(!hero)return;
   header.classList.toggle('scrolled',hero.getBoundingClientRect().bottom<=header.offsetHeight);
 }
 
+function setMenu(open,{restoreFocus=true}={}){
+  if(!menuButton||!mobileNav)return;
+  if(open)menuTrigger=document.activeElement;
+  menuButton.setAttribute('aria-expanded',String(open));
+  menuButton.setAttribute('aria-label',open?'Close menu':'Open menu');
+  mobileNav.setAttribute('aria-hidden',String(!open));
+  mobileNav.inert=!open;
+  mobileNav.classList.toggle('is-open',open);
+  header.classList.toggle('menu-open',open);
+  document.body.classList.toggle('menu-open',open);
+  if(open){
+    requestAnimationFrame(()=>mobileNav.querySelector('a')?.focus());
+  }else if(restoreFocus&&menuTrigger instanceof HTMLElement){
+    menuTrigger.focus();
+  }
+}
+
 menuButton?.addEventListener('click',()=>{
-  const open=menuButton.getAttribute('aria-expanded')==='true';
-  menuButton.setAttribute('aria-expanded',String(!open));
-  menuButton.setAttribute('aria-label',open?'Open menu':'Close menu');
-  mobileNav.hidden=open;
-  header.classList.toggle('menu-open',!open);
+  setMenu(menuButton.getAttribute('aria-expanded')!=='true');
 });
 
-mobileNav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
-  mobileNav.hidden=true;
-  menuButton.setAttribute('aria-expanded','false');
-  menuButton.setAttribute('aria-label','Open menu');
-  header.classList.remove('menu-open');
-}));
+mobileNav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>setMenu(false,{restoreFocus:false})));
+
+document.addEventListener('keydown',event=>{
+  if(menuButton?.getAttribute('aria-expanded')!=='true'||!mobileNav)return;
+  if(event.key==='Escape'){
+    event.preventDefault();
+    setMenu(false);
+    return;
+  }
+  if(event.key!=='Tab')return;
+  const focusable=[menuButton,...mobileNav.querySelectorAll('a')];
+  const first=focusable[0];
+  const last=focusable.at(-1);
+  if(event.shiftKey&&document.activeElement===first){
+    event.preventDefault();
+    last.focus();
+  }else if(!event.shiftKey&&document.activeElement===last){
+    event.preventDefault();
+    first.focus();
+  }
+});
+
+desktopBreakpoint.addEventListener('change',event=>{
+  if(event.matches)setMenu(false,{restoreFocus:false});
+});
 
 const revealObserver=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{

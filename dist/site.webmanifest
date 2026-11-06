@@ -1,0 +1,17 @@
+{
+  "name": "JIN — Downtown Dubai",
+  "short_name": "JIN",
+  "description": "An intimate omakase dining concept in Downtown Dubai.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9f5ef",
+  "theme_color": "#650815",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
