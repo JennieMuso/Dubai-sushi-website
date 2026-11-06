@@ -2,6 +2,27 @@
 
 An editorial multi-page website concept for an intimate sushi restaurant in Downtown Dubai.
 
+## Project structure
+
+```text
+.
+├── assets/                 # Optimized WebP imagery and favicon
+├── index.html              # Homepage
+├── experience.html         # Dining experience
+├── chef.html               # Chef biography
+├── omakase.html            # Omakase experience
+├── menu.html               # À la carte menu
+├── private-dining.html     # Private dining
+├── reservations.html       # Reservation enquiry
+├── styles.css              # Homepage styles
+├── inner.css               # Inner-page styles
+├── script.js               # Homepage interactions
+├── inner.js                # Shared inner-page interactions
+├── robots.txt
+├── sitemap.xml
+└── site.webmanifest
+```
+
 Open `index.html` in a browser to begin. The project includes:
 
 - `experience.html`
