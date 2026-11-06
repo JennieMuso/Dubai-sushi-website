@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const jsonLd = {"@context":"https://schema.org","@type":"Restaurant","name":"JIN","description":"An intimate omakase dining concept by chef Jin Xiwei in Downtown Dubai.","url":"https://jin-downtown-dubai-sushi.jane-framer-expert.chatgpt.site/","image":"https://jin-downtown-dubai-sushi.jane-framer-expert.chatgpt.site/assets/jin-og.webp","priceRange":"$$$$","servesCuisine":["Japanese","Sushi","Chinese"],"founder":{"@type":"Person","name":"Jin Xiwei"},"address":{"@type":"PostalAddress","addressLocality":"Dubai","addressRegion":"Dubai","addressCountry":"AE"}};
+---
+
+<BaseLayout
+  title={"JIN — An intimate omakase experience in Downtown Dubai"}
+  description={"JIN is an editorial concept for an intimate omakase experience in Downtown Dubai."}
+  ogDescription={"Discover JIN, an intimate sushi counter concept shaped by chef Jin Xiwei in Downtown Dubai."}
+  canonicalPath={"/"}
+  stylesheet={"/styles.css"}
+  script={"/script.js"}
+  home={true}
+  jsonLd={jsonLd}
+>
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-image"><img src="/assets/interior.webp" alt="JIN’s intimate red lacquer sushi counter overlooking the Downtown Dubai skyline" loading="eager" decoding="async" fetchpriority="high" width="1600" height="1000"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner"><p class="hero-location">Downtown Dubai · an intimate dining concept</p><h1 id="hero-title"><span>The art of dining,</span><em>up close.</em></h1><p class="hero-description">A singular sushi experience shaped by precision, curiosity, and the pleasure of having a place at the counter.</p><a href="reservations.html" class="hero-discover">Make your reservation <span aria-hidden="true">↗</span></a></div>
+    <p class="hero-corner">JIN · Dubai</p>
+  </section>
+
+  <section class="experience section-wrap" id="experience" aria-labelledby="experience-title">
+    <div class="experience-heading"><h2 id="experience-title">Dining is <em>an art form.</em></h2><div><p>JIN brings the chef and guest into the same moment. The room is close, the gestures are visible, and each course has the space to become an experience of its own.</p><a class="under-link" href="chef.html">Meet the point of view <span aria-hidden="true">→</span></a></div></div>
+    <div class="ticker" aria-label="A moving visual introduction to JIN">
+      <div class="ticker-track">
+        <div class="ticker-group">
+          <figure class="image-tile tile-food"><img src="/assets/nigiri.webp" alt="Three pieces of nigiri on a handcrafted ceramic plate" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Every detail, considered</figcaption></figure>
+          <figure class="image-tile tile-sake"><img src="/assets/sake.webp" alt="Sake still life with ceramic cup and blossom" loading="lazy" decoding="async" width="1200" height="900"><figcaption>The ritual of arrival</figcaption></figure>
+          <figure class="image-tile tile-room"><img src="/assets/alcove.webp" alt="Concept rendering of a private burgundy dining alcove" loading="lazy" decoding="async" width="1200" height="900"><figcaption>A room of your own</figcaption></figure>
+          <figure class="image-tile tile-hands"><img src="/assets/chef-hands.webp" alt="Chef's hands forming sushi at the counter" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Made before you</figcaption></figure>
+          <figure class="image-tile tile-otoro"><img src="/assets/otoro-brush.webp" alt="A chef brushing nikiri sauce onto otoro nigiri" loading="lazy" decoding="async" width="1200" height="900"><figcaption>The final gesture</figcaption></figure>
+          <figure class="image-tile tile-custard"><img src="/assets/chawanmushi.webp" alt="Chawanmushi topped with uni in a ceramic cup" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Warmth and delicacy</figcaption></figure>
+          <figure class="image-tile tile-selection"><img src="/assets/fish-selection.webp" alt="A selection of pristine fish on crushed ice" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Chosen at its peak</figcaption></figure>
+        </div>
+        <div class="ticker-group" aria-hidden="true">
+          <figure class="image-tile tile-food"><img src="/assets/nigiri.webp" alt="" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Every detail, considered</figcaption></figure>
+          <figure class="image-tile tile-sake"><img src="/assets/sake.webp" alt="" loading="lazy" decoding="async" width="1200" height="900"><figcaption>The ritual of arrival</figcaption></figure>
+          <figure class="image-tile tile-room"><img src="/assets/alcove.webp" alt="" loading="lazy" decoding="async" width="1200" height="900"><figcaption>A room of your own</figcaption></figure>
+          <figure class="image-tile tile-hands"><img src="/assets/chef-hands.webp" alt="" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Made before you</figcaption></figure>
+          <figure class="image-tile tile-otoro"><img src="/assets/otoro-brush.webp" alt="" loading="lazy" decoding="async" width="1200" height="900"><figcaption>The final gesture</figcaption></figure>
+          <figure class="image-tile tile-custard"><img src="/assets/chawanmushi.webp" alt="" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Warmth and delicacy</figcaption></figure>
+          <figure class="image-tile tile-selection"><img src="/assets/fish-selection.webp" alt="" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Chosen at its peak</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chef-story section-wrap" id="chef" aria-labelledby="chef-title">
+    <div class="chef-lead"><h2 id="chef-title">A chef with <em>more to say.</em></h2><div class="chef-biography"><h3>Jin Xiwei</h3><p>Jin Xiwei is a Michelin-starred Chinese chef whose cooking is defined by precision, restraint, and an instinct for finding harmony between culinary traditions. His work begins with the discipline of the ingredient and ends with a deeply personal expression on the plate.</p><p>Across his career, Jin has developed a language that brings Chinese sensibility into conversation with Japanese technique. At JIN, that point of view becomes intimate: a counter-led experience where each course is prepared in view, paced for the room, and shaped around the guest.</p></div></div>
+    <div class="chef-visuals"><figure class="chef-large"><img src="/assets/chef-hands.webp" alt="Chef Jin Xiwei working by hand at the sushi counter" loading="lazy" decoding="async" width="1200" height="900"><figcaption>The craft, within reach</figcaption></figure><div class="chef-side"><p>In this space, guests see the patience behind each gesture, the balance behind each bite, and the confidence to leave room for surprise.</p><figure><img src="/assets/sashimi.webp" alt="Sashimi course on a dark ceramic plate" loading="lazy" decoding="async" width="1200" height="900"><figcaption>A quiet moment on the plate</figcaption></figure></div></div>
+  </section>
+
+  <section class="omakase section-wrap" id="omakase" aria-labelledby="omakase-title">
+    <div class="omakase-heading"><h2 id="omakase-title">The pleasure of <em>letting go.</em></h2><p>Omakase invites you to trust the chef. An evening moves through contrasts in temperature, texture, and flavour, with each course arriving at precisely its moment.</p></div>
+    <div class="omakase-images"><figure class="omakase-main"><img src="/assets/sashimi.webp" alt="A sashimi dish served on black ceramic" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Seasonal expression</figcaption></figure><figure class="omakase-small"><img src="/assets/nigiri.webp" alt="Nigiri served on ivory ceramic" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Crafted one piece at a time</figcaption></figure></div>
+    <div class="omakase-close"><p>No two evenings need to feel identical. What stays constant is attention: to the ingredient, to the room, and to the guest across the counter.</p><a class="under-link" href="reservations.html">Plan your evening <span aria-hidden="true">→</span></a></div>
+  </section>
+
+  <section class="private section-wrap" id="private" aria-labelledby="private-title"><div class="private-copy"><h2 id="private-title">For moments <em>worth keeping.</em></h2><p>Some evenings ask for a little more privacy. JIN’s proposed intimate setting gives celebrations, conversations, and close company the attention they deserve.</p><a class="under-link" href="private-dining.html">Explore private dining <span aria-hidden="true">→</span></a></div><div class="private-images"><figure class="private-room"><img src="/assets/alcove.webp" alt="Concept rendering of a private dining table in a red alcove" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Private dining, imagined for JIN</figcaption></figure><figure class="private-detail"><img src="/assets/sake.webp" alt="Sake cup and carafe on a lacquer table" loading="lazy" decoding="async" width="1200" height="900"><figcaption>Small rituals, lasting impressions</figcaption></figure></div></section>
+
+  <section class="setting" aria-labelledby="setting-title"><div class="setting-copy section-wrap"><h2 id="setting-title">A world apart, <em>within the city.</em></h2><p>Warm lacquer, soft light, and a counter that keeps every guest close to the craft. A richly layered setting for Downtown Dubai.</p></div><figure><img src="/assets/interior.webp" alt="Wide concept rendering of JIN's red lacquer dining room" loading="lazy" decoding="async" width="1200" height="900"><figcaption>JIN · proposed dining room</figcaption></figure></section>
+
+  <section class="questions section-wrap" id="questions" aria-labelledby="questions-title"><div class="questions-title"><h2 id="questions-title">The details, <em>for now.</em></h2><p>JIN is a developing concept. We will share the exact details as the restaurant takes shape.</p></div><div class="question-list"><details><summary>Where will JIN be located?<span aria-hidden="true">+</span></summary><p>The concept is planned for Downtown Dubai. The full address will be shared when confirmed.</p></details><details><summary>Who is the chef?<span aria-hidden="true">+</span></summary><p>JIN is led by Jin Xiwei, a Michelin-starred Chinese chef bringing a personal, cross-cultural point of view to an intimate sushi counter.</p></details><details><summary>Is the menu available?<span aria-hidden="true">+</span></summary><p>The dining experience is envisioned around omakase. The final menu, format, and pricing are still to be confirmed.</p></details><details><summary>Can I make a reservation?<span aria-hidden="true">+</span></summary><p>Reservations are not yet open. Booking details will be added here once the restaurant is ready to welcome guests.</p></details></div></section>
+
+  <section class="reservations" id="reservations" aria-labelledby="reservations-title"><div class="reservation-content"><h2 id="reservations-title">Your place at the counter <em>awaits.</em></h2><p>An invitation to a different kind of evening in Downtown Dubai. Opening and reservations will be announced here.</p><a href="#top" class="reservation-link">Return to the beginning <span aria-hidden="true">↑</span></a></div><figure><img src="/assets/alcove.webp" alt="Intimate red dining alcove concept rendering" loading="lazy" decoding="async" width="1200" height="900"><figcaption>JIN · a first look</figcaption></figure></section>
+</main>
+</BaseLayout>

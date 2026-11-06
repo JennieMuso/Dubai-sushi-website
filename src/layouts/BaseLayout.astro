@@ -1,0 +1,74 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogDescription?: string;
+  stylesheet: "/styles.css" | "/inner.css";
+  script: "/script.js" | "/inner.js";
+  active?: "experience" | "chef" | "omakase" | "menu" | "private-dining" | "reservations";
+  home?: boolean;
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = "/",
+  ogDescription = description,
+  stylesheet,
+  script,
+  active,
+  home = false,
+  jsonLd
+} = Astro.props;
+const site = Astro.site ?? new URL("https://jin-downtown-dubai-sushi.jane-framer-expert.chatgpt.site");
+const canonical = new URL(canonicalPath, site).toString();
+const socialImage = new URL("/assets/jin-og.webp", site).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#970e21" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:site_name" content="JIN" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_AE" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="JIN’s intimate red lacquer sushi counter overlooking Downtown Dubai" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content="JIN’s intimate red lacquer sushi counter overlooking Downtown Dubai" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href={stylesheet} />
+    <slot name="head" />
+  </head>
+  <body>
+    <SiteHeader active={active} home={home} />
+    <slot />
+    <SiteFooter />
+    <script src={script}></script>
+  </body>
+</html>

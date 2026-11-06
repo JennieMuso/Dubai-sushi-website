@@ -1,0 +1,21 @@
+---
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
+---
+
+<form class="enquiry-form reveal reveal-delay" action="/api/reservations" method="post" novalidate data-reservation-form>
+  <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" placeholder="Your first and last name" maxlength="100" required /></div>
+  <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required /></div>
+  <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+971 50 000 0000" maxlength="30" /></div>
+  <div class="field"><label for="occasion">Experience</label><select id="occasion" name="occasion" required><option value="">Choose an experience</option><option>Counter dining</option><option>Private dining</option><option>Full counter experience</option><option>Opening updates</option></select></div>
+  <div class="field"><label for="date">Preferred date</label><input id="date" name="date" type="text" inputmode="numeric" placeholder="DD / MM / YYYY" maxlength="20" /></div>
+  <div class="field"><label for="guests">Guests</label><input id="guests" name="guests" type="number" min="1" max="20" inputmode="numeric" placeholder="Number of guests" /></div>
+  <div class="field full"><label for="message">Tell us about the evening</label><textarea id="message" name="message" placeholder="Share the occasion, preferences, or dietary requirements" maxlength="2000"></textarea></div>
+  <div class="form-trap" aria-hidden="true"><label for="company">Company</label><input id="company" name="company" tabindex="-1" autocomplete="off" /></div>
+  <input type="hidden" name="submission_id" value="" />
+  <div class="turnstile-field">
+    {siteKey ? <div class="cf-turnstile" data-sitekey={siteKey} data-action="reservation_enquiry" data-theme="light"></div> : <p class="form-configuration">Reservations are being configured. Please return shortly.</p>}
+  </div>
+  <p class="form-note">Submitting an enquiry does not confirm a reservation. The JIN team will reply with availability and next steps.</p>
+  <button class="form-action" type="submit" disabled={!siteKey}>Send your enquiry</button>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>

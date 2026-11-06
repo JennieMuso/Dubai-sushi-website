@@ -88,15 +88,41 @@ function onScroll(){
   if(!ticking){requestAnimationFrame(updateParallax);ticking=true}
 }
 
-document.querySelector('.enquiry-form')?.addEventListener('submit',event=>{
+document.querySelector('[data-reservation-form]')?.addEventListener('submit',async event=>{
   event.preventDefault();
-  const status=event.currentTarget.querySelector('.form-status');
-  if(!event.currentTarget.checkValidity()){
+  const form=event.currentTarget;
+  const status=form.querySelector('.form-status');
+  const button=form.querySelector('.form-action');
+  if(!form.checkValidity()){
     status.textContent='Please complete the required fields.';
-    event.currentTarget.reportValidity();
+    form.reportValidity();
     return;
   }
-  status.textContent='Thank you. This preview form is ready to connect to the restaurant’s booking system.';
+  if(!form.querySelector('[name="cf-turnstile-response"]')?.value){
+    status.textContent='Please complete the security check.';
+    return;
+  }
+  form.elements.submission_id.value=crypto.randomUUID();
+  button.disabled=true;
+  button.setAttribute('aria-busy','true');
+  status.textContent='Sending your enquiry…';
+  try{
+    const response=await fetch(form.action,{
+      method:'POST',
+      body:new FormData(form),
+      headers:{Accept:'application/json'}
+    });
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(result.message||'We could not send your enquiry. Please try again.');
+    form.reset();
+    status.textContent='Thank you. Your enquiry has been sent to the JIN team.';
+  }catch(error){
+    status.textContent=error instanceof Error?error.message:'We could not send your enquiry. Please try again.';
+  }finally{
+    window.turnstile?.reset();
+    button.disabled=false;
+    button.removeAttribute('aria-busy');
+  }
 });
 
 updateHeader();

@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ReservationForm from "../components/ReservationForm.astro";
+---
+
+<BaseLayout
+  title={"Reservations at JIN — Downtown Dubai"}
+  description={"Plan a reservation or private dining enquiry for JIN in Downtown Dubai."}
+  ogDescription={"Plan a reservation or private dining enquiry for JIN in Downtown Dubai."}
+  canonicalPath={"/reservations.html"}
+  stylesheet={"/inner.css"}
+  script={"/inner.js"}
+  active={"reservations"}
+>
+<script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<main id="main">
+<section class="inner-hero" aria-labelledby="page-title">
+  <div class="inner-hero-media"><img src="/assets/reservations-hero.webp" alt="JIN dining room overlooking the Downtown Dubai skyline" loading="eager" decoding="async" fetchpriority="high" width="1600" height="1000"></div>
+  <div class="inner-hero-scrim"></div>
+  <div class="inner-hero-content"><p class="hero-meta">Reservations · Downtown Dubai</p><h1 id="page-title">Your place at the counter <em>awaits.</em></h1><p class="hero-copy">Share the evening you have in mind. The concept form below is ready to connect to the restaurant’s final booking system.</p><a class="hero-scroll" href="#story">Explore <span aria-hidden="true">↓</span></a></div>
+  <p class="hero-page">Reservations</p>
+</section>
+<section class="section-space page-wrap" id="story"><div class="enquiry-layout"><div class="enquiry-copy reveal"><h2>Plan your <em>evening.</em></h2><p>Use this enquiry form for counter dining, private occasions, or early access to opening reservations.</p><p>JIN is currently presented as a concept. Dates, availability, and the booking destination will be confirmed before launch.</p></div><ReservationForm /></div></section>
+<figure class="full-image parallax-media"><img src="/assets/reservations-hero.webp" alt="JIN dining room framed by the Dubai skyline" loading="lazy" decoding="async" width="1200" height="900"><figcaption>A proposed setting in Downtown Dubai</figcaption></figure>
+<section class="section-space page-wrap field-pale"><div class="intro-grid"><h2 class="display-heading reveal">A few details, <em>before you arrive.</em></h2><div class="intro-copy reveal reveal-delay"><p>The following information establishes the intended guest experience and should be confirmed with operations before launch.</p></div></div><dl class="fact-list reveal"><div class="fact-row"><dt>Location</dt><dd>Downtown Dubai, UAE. The final address and arrival details are pending confirmation.</dd></div><div class="fact-row"><dt>Experience</dt><dd>An intimate omakase counter with options for private dining and full-counter occasions.</dd></div><div class="fact-row"><dt>Timing</dt><dd>Set seating times are proposed to preserve the rhythm of the menu and service.</dd></div><div class="fact-row"><dt>Dietary needs</dt><dd>Guests will be asked to share allergies and dietary requirements before confirmation.</dd></div><div class="fact-row"><dt>Dress</dt><dd>Elegant evening attire is suggested for the intended dining experience.</dd></div></dl></section>
+<section class="next-page"><h2>Discover <em>the experience.</em></h2><a href="experience.html">Begin at the counter →</a></section>
+</main>
+</BaseLayout>
