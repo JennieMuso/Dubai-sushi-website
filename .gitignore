@@ -2,3 +2,6 @@
 desktop*.png
 mobile*.png
 site.tar.gz
+
+# Local platform configuration
+.openai/
