@@ -1,0 +1,4 @@
+# Local visual QA and packaging artifacts
+desktop*.png
+mobile*.png
+site.tar.gz

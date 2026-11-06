@@ -1,0 +1,10 @@
+# <type>: concise description of the user-facing change
+
+# Why:
+# Explain the reason for the change and the outcome it supports.
+
+# What changed:
+# Summarize the important implementation and design decisions.
+
+# Verification:
+# Record the viewports, interactions, or checks completed.
