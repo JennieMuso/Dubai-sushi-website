@@ -10,7 +10,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
   <div class="field"><label for="date">Preferred date</label><input id="date" name="date" type="text" inputmode="numeric" placeholder="DD / MM / YYYY" maxlength="20" /></div>
   <div class="field"><label for="guests">Guests</label><input id="guests" name="guests" type="number" min="1" max="20" inputmode="numeric" placeholder="Number of guests" /></div>
   <div class="field full"><label for="message">Tell us about the evening</label><textarea id="message" name="message" placeholder="Share the occasion, preferences, or dietary requirements" maxlength="2000"></textarea></div>
-  <div class="form-trap" aria-hidden="true"><label for="company">Company</label><input id="company" name="company" tabindex="-1" autocomplete="off" /></div>
+  <div class="form-trap" aria-hidden="true"><label for="website">Leave this field blank</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="one-time-code" /></div>
   <input type="hidden" name="submission_id" value="" />
   <div class="turnstile-field">
     {siteKey ? <div class="cf-turnstile" data-sitekey={siteKey} data-action="reservation_enquiry" data-theme="light"></div> : <p class="form-configuration">Reservations are being configured. Please return shortly.</p>}

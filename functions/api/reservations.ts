@@ -21,7 +21,7 @@ export interface ReservationPayload {
   message: string;
   submissionId: string;
   turnstileToken: string;
-  company: string;
+  website: string;
 }
 
 const allowedOccasions = new Set([
@@ -52,7 +52,7 @@ export function parseReservation(form: FormData): ReservationPayload {
     message: text(form, "message"),
     submissionId: text(form, "submission_id"),
     turnstileToken: text(form, "cf-turnstile-response"),
-    company: text(form, "company")
+    website: text(form, "website")
   };
 }
 
@@ -184,7 +184,7 @@ export async function handleReservation(request: Request, env: Env): Promise<Res
   let form: FormData;
   try { form = await request.formData(); } catch { return json({ ok: false, message: "We could not read the enquiry." }, 400); }
   const payload = parseReservation(form);
-  if (payload.company) return json({ ok: true, message: "Your enquiry has been received." });
+  if (payload.website) return json({ ok: true, message: "Your enquiry has been received." });
   const errors = validateReservation(payload);
   if (errors.length) return json({ ok: false, message: "Please check the highlighted details and try again.", fields: errors }, 400);
 

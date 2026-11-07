@@ -159,7 +159,7 @@ footer>p{text-align:center;color:#e3b7ad;font-size:10px}
 :root{--display-font:Georgia,'Times New Roman',Times,serif}
 h1,h2,h3,blockquote,.wordmark,.hero-page,.fact-row dt,.footer-wordmark,.menu-index a,.mobile-nav{font-family:var(--display-font)}
 
-.form-trap{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.form-trap{display:none!important}
 .turnstile-field{grid-column:1/-1;min-height:65px}
 .form-configuration{font-size:13px;color:var(--red)}
 .form-action:disabled{cursor:not-allowed;opacity:.58}

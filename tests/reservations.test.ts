@@ -20,7 +20,7 @@ function validForm(): FormData {
   form.set("message", "Anniversary <table>");
   form.set("submission_id", "8ba79f8b-88c1-45fb-aef0-07e89a0534ea");
   form.set("cf-turnstile-response", "verified-token");
-  form.set("company", "");
+  form.set("website", "");
   return form;
 }
 

@@ -69,6 +69,6 @@ const socialImage = new URL("/assets/jin-og.webp", site).toString();
     <SiteHeader active={active} home={home} />
     <slot />
     <SiteFooter />
-    <script src={script}></script>
+    <script is:inline src={script}></script>
   </body>
 </html>
