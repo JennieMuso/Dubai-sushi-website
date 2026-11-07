@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { escapeHtml, handleReservation, parseReservation, validateReservation, type Env } from "../worker/index";
+import { escapeHtml, handleReservation, parseReservation, validateReservation, type Env } from "../functions/api/reservations";
 
 const env: Env = {
   RESEND_API_KEY: "re_test_key",

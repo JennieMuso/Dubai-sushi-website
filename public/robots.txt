@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jin-downtown-dubai-sushi.jane-framer-expert.chatgpt.site/sitemap.xml
+Sitemap: https://jin-sushi-restaurant.pages.dev/sitemap.xml

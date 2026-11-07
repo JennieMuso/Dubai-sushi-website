@@ -1,6 +1,6 @@
 # JIN Dubai
 
-An Astro website for JIN, an editorial fine dining concept in Downtown Dubai. The existing visual system, responsive layouts, image treatments, and scroll motion are preserved while the site is prepared for Cloudflare Workers, Resend, and Cloudflare Turnstile.
+An Astro website for JIN, an editorial fine dining concept in Downtown Dubai. The existing visual system, responsive layouts, image treatments, and scroll motion are preserved while the site runs on Cloudflare Pages with a Pages Function, Resend, and Cloudflare Turnstile.
 
 ## Architecture
 
@@ -9,13 +9,13 @@ Browser
   ├── Astro-generated pages and static assets
   └── POST /api/reservations
           ↓
-      Cloudflare Worker
+      Cloudflare Pages Function
           ├── validates origin and form data
           ├── verifies Cloudflare Turnstile
           └── sends the enquiry through Resend
 ```
 
-The site is statically rendered by Astro. Cloudflare serves the generated pages and invokes the Worker only for the reservation API.
+The site is statically rendered by Astro. Cloudflare serves the generated pages and invokes a Pages Function on the Workers runtime only for the reservation API.
 
 ## Project structure
 
@@ -26,10 +26,9 @@ The site is statically rendered by Astro. Cloudflare serves the generated pages 
 │   ├── components/         # Shared navigation, footer, and reservation form
 │   ├── layouts/            # Shared metadata and document structure
 │   └── pages/              # Seven Astro routes
-├── worker/index.ts         # Reservation API, Turnstile, and Resend integration
+├── functions/api/          # Reservation API, Turnstile, and Resend integration
 ├── tests/                  # Reservation API tests
 ├── astro.config.mjs
-├── cloudflare.config.ts
 └── .dev.vars.example       # Local variable template without production secrets
 ```
 
@@ -43,17 +42,11 @@ cp .dev.vars.example .dev.vars
 npm run dev
 ```
 
-`npm run dev` starts Astro for design work. Use the Cloudflare development command when testing the Worker and form together:
-
-```bash
-PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA npm run cf:dev
-```
-
-The site key above is Cloudflare's public test key. The matching test secret is documented in `.dev.vars.example` and must never be used in production.
+`npm run dev` starts Astro for design work. `.dev.vars` is ignored by Git and may hold local Pages Function values. `.dev.vars.example` contains names and placeholders only.
 
 ## Configuration
 
-Set `PUBLIC_TURNSTILE_SITE_KEY` as a build variable. Store every other value as a Cloudflare Worker secret.
+Set `PUBLIC_TURNSTILE_SITE_KEY` as a Pages build variable. Store every other value as an encrypted Cloudflare Pages secret.
 
 | Variable | Purpose |
 | --- | --- |
@@ -68,29 +61,28 @@ Production setup requires:
 
 1. A Cloudflare Turnstile widget registered to the exact production hostname.
 2. A Resend sending domain with SPF and DKIM verified. DMARC is recommended.
-3. Worker secrets stored through Cloudflare. Do not commit `.dev.vars` or API keys.
-4. The final production URL set as Astro's `site` value and in `public/robots.txt` and `public/sitemap.xml`.
+3. Pages secrets stored through Cloudflare. Do not commit `.env`, `.dev.vars`, API keys, or Turnstile secrets.
+4. The production URL `https://jin-sushi-restaurant.pages.dev` registered in Turnstile and used by the website metadata.
 
 ## Quality checks
 
 ```bash
 npm test
 npm run build
-npm run cf:build
 ```
 
 The reservation tests cover input normalization, validation, HTML escaping, Turnstile hostname and action checks, Resend delivery, and rejection paths.
 
 ## Deployment
 
-Connect the repository to Cloudflare and use the `astro` branch. Build and deploy with:
+Create the Cloudflare Pages project as `jin-sushi-restaurant` and connect this repository with:
 
-```bash
-npm ci
-npm run cf:deploy
-```
+- Production branch: `astro`
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Root directory: `/`
 
-Add the public site key as a build variable and the five private values above as Worker secrets. The Cloudflare build output is written to `.cloudflare/output/v0/`.
+Add the public site key as a build variable and the five private values above as encrypted Pages secrets. Cloudflare then deploys every push to the `astro` branch at `https://jin-sushi-restaurant.pages.dev`.
 
 ## Content status
 

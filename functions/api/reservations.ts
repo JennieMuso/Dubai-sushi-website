@@ -6,6 +6,11 @@ export interface Env {
   ALLOWED_HOSTNAMES: string;
 }
 
+interface PagesContext {
+  request: Request;
+  env: Env;
+}
+
 export interface ReservationPayload {
   name: string;
   email: string;
@@ -187,10 +192,6 @@ export async function handleReservation(request: Request, env: Env): Promise<Res
   return json({ ok: true, message: "Your enquiry has been sent." });
 }
 
-export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    const url = new URL(request.url);
-    if (url.pathname === "/api/reservations") return handleReservation(request, env);
-    return new Response("Not found", { status: 404 });
-  }
-};
+export function onRequestPost(context: PagesContext): Promise<Response> {
+  return handleReservation(context.request, context.env);
+}

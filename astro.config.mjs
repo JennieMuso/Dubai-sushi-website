@@ -1,16 +1,9 @@
 import { defineConfig } from "astro/config";
-import { cloudflare } from "@cloudflare/vite-plugin";
 
 export default defineConfig({
-  site: "https://jin-downtown-dubai-sushi.jane-framer-expert.chatgpt.site",
+  site: "https://jin-sushi-restaurant.pages.dev",
   output: "static",
   build: {
     format: "file"
-  },
-  vite: {
-    plugins: [cloudflare()],
-    build: {
-      sourcemap: true
-    }
   }
 });
