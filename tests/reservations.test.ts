@@ -3,7 +3,7 @@ import { escapeHtml, handleReservation, parseReservation, validateReservation, t
 
 const env: Env = {
   RESEND_API_KEY: "re_test_key",
-  TURNSTILE_SECRET_KEY: "turnstile_test_key",
+  TURNSTILE_SECRET: "turnstile_test_key",
   RESERVATION_TO_EMAIL: "reservations@example.com",
   RESERVATION_FROM_EMAIL: "JIN Reservations <reservations@example.com>",
   ALLOWED_HOSTNAMES: "jin.example.com,localhost"
@@ -83,6 +83,14 @@ describe("reservation endpoint", () => {
 
   it("rejects a Turnstile response issued for a different hostname", async () => {
     const fetchMock = vi.fn().mockResolvedValueOnce(Response.json({ success: true, action: "reservation_enquiry", hostname: "attacker.example" }));
+    vi.stubGlobal("fetch", fetchMock);
+    const response = await handleReservation(request(), env);
+    expect(response.status).toBe(403);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("fails closed when Turnstile verification is unavailable", async () => {
+    const fetchMock = vi.fn().mockRejectedValueOnce(new Error("verification unavailable"));
     vi.stubGlobal("fetch", fetchMock);
     const response = await handleReservation(request(), env);
     expect(response.status).toBe(403);

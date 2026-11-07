@@ -51,7 +51,7 @@ Set `PUBLIC_TURNSTILE_SITE_KEY` as a Pages build variable. Store every other val
 | Variable | Purpose |
 | --- | --- |
 | `PUBLIC_TURNSTILE_SITE_KEY` | Public Turnstile widget site key used during the Astro build |
-| `TURNSTILE_SECRET_KEY` | Private Turnstile verification secret |
+| `TURNSTILE_SECRET` | Private Turnstile verification secret |
 | `RESEND_API_KEY` | Resend API key with sending access |
 | `RESERVATION_TO_EMAIL` | Client inbox that receives reservation enquiries |
 | `RESERVATION_FROM_EMAIL` | Verified sender, such as `JIN Reservations <reservations@mail.example.com>` |

@@ -1,6 +1,6 @@
 # Cloudflare Pages local-development values. Copy to .dev.vars and never commit it.
 RESEND_API_KEY=replace_with_resend_api_key
-TURNSTILE_SECRET_KEY=replace_with_turnstile_secret
+TURNSTILE_SECRET=replace_with_turnstile_secret
 RESERVATION_TO_EMAIL=reservations@example.com
 RESERVATION_FROM_EMAIL=JIN Reservations <reservations@your-verified-domain.com>
 ALLOWED_HOSTNAMES=localhost,127.0.0.1

@@ -1,6 +1,6 @@
 export interface Env {
   RESEND_API_KEY: string;
-  TURNSTILE_SECRET_KEY: string;
+  TURNSTILE_SECRET: string;
   RESERVATION_TO_EMAIL: string;
   RESERVATION_FROM_EMAIL: string;
   ALLOWED_HOSTNAMES: string;
@@ -96,26 +96,31 @@ function configuredHosts(env: Env): Set<string> {
 
 async function verifyTurnstile(request: Request, env: Env, payload: ReservationPayload): Promise<boolean> {
   const body = new URLSearchParams({
-    secret: env.TURNSTILE_SECRET_KEY,
+    secret: env.TURNSTILE_SECRET,
     response: payload.turnstileToken,
     idempotency_key: payload.submissionId
   });
   const visitorIp = request.headers.get("CF-Connecting-IP");
   if (visitorIp) body.set("remoteip", visitorIp);
 
-  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body
-  });
-  if (!response.ok) return false;
-  const result = await response.json() as { success?: boolean; action?: string; hostname?: string };
-  const hosts = configuredHosts(env);
-  const requestHost = new URL(request.url).hostname.toLowerCase();
-  return result.success === true
-    && result.action === "reservation_enquiry"
-    && typeof result.hostname === "string"
-    && (result.hostname.toLowerCase() === requestHost || hosts.has(result.hostname.toLowerCase()));
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+      signal: AbortSignal.timeout(10_000)
+    });
+    if (!response.ok) return false;
+    const result = await response.json() as { success?: boolean; action?: string; hostname?: string };
+    const hosts = configuredHosts(env);
+    const requestHost = new URL(request.url).hostname.toLowerCase();
+    return result.success === true
+      && result.action === "reservation_enquiry"
+      && typeof result.hostname === "string"
+      && (result.hostname.toLowerCase() === requestHost || hosts.has(result.hostname.toLowerCase()));
+  } catch {
+    return false;
+  }
 }
 
 function buildEmail(payload: ReservationPayload): { subject: string; text: string; html: string } {
